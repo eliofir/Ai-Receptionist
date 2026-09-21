@@ -1,22 +1,19 @@
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
+node_modules/
+dist/
+# Site media (generated images/video/fonts). Deliberately NOT versioned: these are
+# binaries that git history can never shrink, so committing them would grow the
+# site's repo bundle on every revision. The platform uploads site-assets/ to the
+# R2 CDN and records each file in the site's `assets` table — that catalog is the
+# source of truth, and the app resolves media through useAssets() at runtime, so
+# an empty site-assets/ after a restore is expected and harmless.
+site-assets/
+# Vincen QA tooling (verify_site.py / probe_page.py), baked into the E2B template
+# — NOT the user's site source. Ignored so (a) a cold restore uses the freshly-baked
+# latest instead of an old bundle's copy, and (b) the user's source.zip (git archive
+# HEAD) never ships Vincen internals. The platform's restore also excludes+untracks it.
+scripts/
+.tanstack/
+*.local
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+.env.*
+.DS_Store
