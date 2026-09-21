@@ -1,2 +1,3 @@
-# Ai-Receptionist
-Personal portfolio website built with React
+# Ai Receptionist
+
+Personal portfolio website built with React.
