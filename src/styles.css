@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Ophir Insurance — dark, calm, trust-first. Onyx canvas, graphite surfaces,
+   a single cobalt action colour, ivory type. Edit tokens here to re-theme. */
+:root {
+  --radius: 0.75rem;
+  --font-body: "Heebo", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: "Heebo", "Archivo", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --background: #171721;
+  --foreground: #ededf3;
+  --card: #1e1e2a;
+  --card-foreground: #ededf3;
+  --popover: #1e1e2a;
+  --popover-foreground: #ededf3;
+  --primary: #5266eb;
+  --primary-foreground: #ffffff;
+  --secondary: #272735;
+  --secondary-foreground: #ededf3;
+  --muted: #272735;
+  --muted-foreground: #c3c3cc;
+  --accent: #272735;
+  --accent-foreground: #ededf3;
+  --destructive: #e5484d;
+  --border: rgba(226, 227, 237, 0.16);
+  --input: rgba(226, 227, 237, 0.22);
+  --ring: #5266eb;
+}
+
+.dark {
+  --background: #171721;
+  --foreground: #ededf3;
+  --card: #1e1e2a;
+  --card-foreground: #ededf3;
+  --popover: #1e1e2a;
+  --popover-foreground: #ededf3;
+  --primary: #5266eb;
+  --primary-foreground: #ffffff;
+  --secondary: #272735;
+  --secondary-foreground: #ededf3;
+  --muted: #272735;
+  --muted-foreground: #c3c3cc;
+  --accent: #272735;
+  --accent-foreground: #ededf3;
+  --destructive: #e5484d;
+  --border: rgba(226, 227, 237, 0.16);
+  --input: rgba(226, 227, 237, 0.22);
+  --ring: #5266eb;
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* ---------- Atmosphere utilities ---------- */
+.liquid-glass,
+.liquid-glass-strong {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+.liquid-glass-strong {
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+}
+.gradient-mesh {
+  background-image:
+    radial-gradient(at 15% 10%, color-mix(in oklch, var(--primary) 26%, transparent) 0%, transparent 55%),
+    radial-gradient(at 85% 90%, color-mix(in oklch, var(--primary) 14%, transparent) 0%, transparent 55%);
+}
+
+/* Typing indicator for the assistant */
+@keyframes ophir-typing {
+  0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+.typing-dot {
+  animation: ophir-typing 1.2s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
+@media (prefers-reduced-motion: reduce) {
+  .typing-dot { animation: none; opacity: 0.6; }
+}
+
+/* Thin scrollbar for the chat thread */
+.thread-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(226, 227, 237, 0.25) transparent;
+}
+.thread-scroll::-webkit-scrollbar { width: 8px; }
+.thread-scroll::-webkit-scrollbar-thumb {
+  background: rgba(226, 227, 237, 0.2);
+  border-radius: 999px;
+}
+
+/* Voice mode — listening pulse ring + speaking glow */
+@keyframes ophir-pulse-ring {
+  0% { transform: scale(0.92); opacity: 0.7; }
+  70% { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+.voice-ring {
+  animation: ophir-pulse-ring 1.6s infinite ease-out;
+}
+@keyframes ophir-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(82, 102, 235, 0.55); }
+  50% { box-shadow: 0 0 0 14px rgba(82, 102, 235, 0); }
+}
+.voice-glow {
+  animation: ophir-glow 1.5s infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .voice-ring, .voice-glow { animation: none; }
+}
+
+/* Voice demo — listening pulse ring */
+@keyframes ophir-pulse-ring {
+  0% { transform: scale(0.92); opacity: 0.7; }
+  70% { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+.voice-ring {
+  animation: ophir-pulse-ring 1.6s infinite ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .voice-ring { animation: none; }
+}

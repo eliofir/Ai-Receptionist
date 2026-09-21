@@ -1,0 +1,14 @@
+{
+  "name": "vincen-site",
+  "tier": "react-app",
+  "comment": "Capability declaration read by Vincen provisioning. Drives Neon project setup (auth providers + schema migrations). The agent edits this as it builds.",
+  "auth": {
+    "providers": ["google"]
+  },
+  "tables": [
+    { "name": "profiles", "ownership": "auth-linked" },
+    { "name": "items", "ownership": "per-user" }
+  ],
+  "storage": false,
+  "edgeFunctions": []
+}
